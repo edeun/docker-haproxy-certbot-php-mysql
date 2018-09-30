@@ -1,29 +1,16 @@
-version: '2'
+version: '3'
 
 services:
   haproxy:
     image: haproxy:1.8.14
     volumes:
-      - ./certbot/certs:/usr/local/etc/haproxy/certbot/certs
-      # - ./certbot/webroot:/
-      # - ./ssl:/usr/local/etc/haproxy/ssl
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     ports:
       - "80:80"
       - "443:443"
-    restart: always
     networks:
-      vpcbr:
+      main:
         ipv4_address: 172.18.0.2
-
-  # certbot:
-  #   image: certbot/certbot:latest
-  #   volumes:
-  #     - ./certbot/certs:/etc/letsencrypt
-  #     - ./certbot/webroot:/var/www/certbot_webroot
-  #   networks:
-  #     vpcbr:
-  #       ipv4_address: 172.18.0.3
 
   app:
     image: php:7.2-apache
@@ -32,7 +19,7 @@ services:
     volumes:
       - ./php/example:/var/www/html
     networks:
-      vpcbr:
+      main:
         ipv4_address: 172.18.0.10
 
   mysql:
@@ -46,13 +33,21 @@ services:
       #- MYSQL_USER=myuser
       #- MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
     networks:
-      vpcbr:
-        ipv4_address: 172.18.0.4
+      main:
+        ipv4_address: 172.18.0.3
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     external_links:
       - mysql:db
     networks:
-      vpcbr:
+      main:
         ipv4_address: 172.18.0.5
+
+networks: 
+  main:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/24
