@@ -3,6 +3,7 @@ version: '3'
 services:
   haproxy:
     image: haproxy:1.8.14
+    restart: always
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     ports:
@@ -21,8 +22,9 @@ services:
 
   app:
     image: php:7.2-apache
-    links:
-      - mysql:db
+    restart: always
+    # links:
+    #   - mysql:db
     volumes:
       - ./php/example:/var/www/html
     networks:
@@ -31,6 +33,7 @@ services:
 
   mysql:
     image: mysql:8.0.12
+    restart: always
     volumes:
       - ./mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
       - ./mysql/data:/var/lib/mysql
@@ -46,8 +49,8 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    links:
-      - mysql:db
+    # links:
+    #   - mysql:db
     networks:
       main:
         ipv4_address: 172.18.0.5
@@ -55,6 +58,7 @@ services:
 networks: 
   main:
     driver: bridge
+    restart: always
     ipam:
       driver: default
       config:
