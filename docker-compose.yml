@@ -3,6 +3,7 @@ version: '3'
 services:
   haproxy:
     image: haproxy:1.8.14
+    container_name: haproxy
     restart: always
     volumes:
       - ${VOLUME_HAPROXY_CFG}:/usr/local/etc/haproxy/haproxy.cfg:ro
@@ -22,6 +23,7 @@ services:
 
   app:
     image: php:7.2-apache
+    container_name: app
     restart: always
     volumes:
       - ${VOLUME_APP}:/var/www/html
@@ -31,6 +33,7 @@ services:
 
   mysql:
     image: mysql:8.0.12
+    container_name: mysql
     restart: always
     volumes:
       - ${VOLUME_MYSQL_CONF}:/etc/mysql/conf.d/mysql.cnf:ro
@@ -46,6 +49,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_PHPMYADMIN}
