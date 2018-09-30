@@ -21,7 +21,7 @@ services:
 
   app:
     image: php:7.2-apache
-    external_links:
+    depends_on:
       - mysql:db
     volumes:
       - ./php/example:/var/www/html
@@ -46,7 +46,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    external_links:
+    depends_on:
       - mysql:db
     networks:
       main:
