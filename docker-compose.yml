@@ -22,7 +22,7 @@ services:
   app:
     image: php:7.2-apache
     depends_on:
-      - mysql:db
+      - mysql
     volumes:
       - ./php/example:/var/www/html
     networks:
@@ -47,7 +47,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
-      - mysql:db
+      - mysql
     networks:
       main:
         ipv4_address: 172.18.0.5
