@@ -8,6 +8,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      - PORT_HTTP=80
+      - PORT_HTTPS=443
+      - HDR_HOST_WEBSITE_URL=exp1.potential.co.kr
+      - HDR_HOST_PHPMYADMIN_URL=exp2.potential.co.kr
     networks:
       main:
         ipv4_address: 172.18.0.2
