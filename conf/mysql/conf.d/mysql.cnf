@@ -27,9 +27,3 @@
 # http://dev.mysql.com/doc/mysql/en/server-system-variables.html
 
 [mysql]
-
-ft_min_word_len=2
-innodb_ft_min_token_size=2
-
-# ngram_token_size을 지정한 경우,
-# innodb_ft_min_token_size과 innodb_ft_max_token_size는 무시됨
