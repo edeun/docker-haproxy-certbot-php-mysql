@@ -55,7 +55,7 @@ services:
       PMA_PORT: 3306
       PMA_HOST: db
       PMA_USER: root
-      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_PHPMYADMIN}
