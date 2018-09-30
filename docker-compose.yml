@@ -34,9 +34,9 @@ services:
       - ./mysql/data:/var/lib/mysql
     environment:
       # $$ for escaping of $: convert $$ to $
-      - MYSQL_ROOT_PASSWORD=on!yforte$$t #on!yforte$t
-      #- MYSQL_USER=myuser
-      #- MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
+      - MYSQL_ROOT_PASSWORD=on!yforte$$t #password: on!yforte$t
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
     networks:
       main:
         ipv4_address: 172.18.0.3
