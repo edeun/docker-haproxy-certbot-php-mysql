@@ -28,8 +28,8 @@ services:
     volumes:
       - ${VOLUME_APP}:/var/www/html
     environment:
-      - MYSQL_PORT: ${MYSQL_DEFAULT_PORT}
-      - MYSQL_HOST: ${IPV4_ADDR_MYSQL}
+      - MYSQL_PORT:${MYSQL_PORT}
+      - MYSQL_HOST:${IPV4_ADDR_MYSQL}
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_APP}
