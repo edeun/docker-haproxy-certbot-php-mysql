@@ -29,7 +29,7 @@ services:
       - ./mysql/data:/var/lib/mysql
     environments:
       # $$ for escaping of $: convert $$ to $
-      - MYSQL_ROOT_PASSWORD=on!yforte$$t #on!yforte$t
+      - MYSQL_ROOT_PASSWORD=on!yforte$$t
       #- MYSQL_USER=myuser
       #- MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
     networks:
