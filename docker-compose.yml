@@ -13,8 +13,8 @@ services:
       - PORT_HTTPS=443
       - HDR_HOST_WEBSITE_URL=exp1.potential.co.kr
       - HDR_HOST_PHPMYADMIN_URL=exp2.potential.co.kr
-      - BACKEND_WEBSITE_SERVER_IP=172.18.0.10:80
-      - BACKEND_PHPMYADMIN_SERVER_IP=172.18.0.5:80
+      - BACKEND_WEBSITE_SERVER_ADDR=172.18.0.10:80
+      - BACKEND_PHPMYADMIN_SERVER_ADDR=172.18.0.5:80
     networks:
       main:
         ipv4_address: 172.18.0.2
