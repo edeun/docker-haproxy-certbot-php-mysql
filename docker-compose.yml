@@ -32,7 +32,7 @@ services:
   mysql:
     image: mysql:8.0.12
     volumes:
-      # - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
       - ./mysql/data:/var/lib/mysql
     environment:
       # $$ for escaping of $: convert $$ to $
