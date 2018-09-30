@@ -53,7 +53,7 @@ services:
     restart: always
     environment:
       PMA_PORT: 3306
-      PMA_HOST: db
+      PMA_HOST: ${IPV4_ADDR_MYSQL}
       PMA_USER: root
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
