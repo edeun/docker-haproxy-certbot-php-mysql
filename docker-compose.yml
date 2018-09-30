@@ -30,6 +30,9 @@ services:
     environment:
       - MYSQL_PORT:${MYSQL_PORT}
       - MYSQL_HOST:${IPV4_ADDR_MYSQL}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_APP}
