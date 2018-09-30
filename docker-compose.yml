@@ -38,7 +38,7 @@ services:
       # $$ for escaping of $: convert $$ to $
       - MYSQL_ROOT_PASSWORD=on!yforte$$t #password: on!yforte$t
       - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
+      - MYSQL_PASSWORD=myPa$$sw0rd #password: myPa$sw0rd
       - MYSQL_DATABASE=test
     networks:
       main:
