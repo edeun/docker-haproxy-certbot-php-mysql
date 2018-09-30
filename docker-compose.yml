@@ -16,14 +16,14 @@ services:
       vpcbr:
         ipv4_address: 172.18.0.2
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/certs:/etc/letsencrypt
-      - ./certbot/webroot:/var/www/certbot_webroot
-    networks:
-      vpcbr:
-        ipv4_address: 172.18.0.3
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./certbot/certs:/etc/letsencrypt
+  #     - ./certbot/webroot:/var/www/certbot_webroot
+  #   networks:
+  #     vpcbr:
+  #       ipv4_address: 172.18.0.3
 
   app:
     image: php:7.2-apache
