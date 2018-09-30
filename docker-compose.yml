@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+  haproxy:
+    image: haproxy:1.8.14
+    volumes:
+      - ./certbot/certs:/usr/local/etc/haproxy/certbot/certs
+      # - ./certbot/webroot:/
+      - ./ssl:/usr/local/etc/haproxy/ssl
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/certs:/etc/letsencrypt
+      - ./certbot/webroot:/var/www/certbot_webroot
+    network_mode: bridge
+  
+  app:
+    image: php:7.2-apache
+    external_links:
+      - mysql:db
+    volumes:
+      - ./php/example:/var/www/html
+    network_mode: bridge
+
+  mysql:
+    image: mysql:8.0.12
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/data:/var/lib/mysql
+    environments:
+      # $$ for escaping of $: convert $$ to $
+      - MYSQL_ROOT_PASSWORD=on!yforte$$t #on!yforte$t
+      #- MYSQL_USER=myuser
+      #- MYSQL_PASSWORD=myPa$$sw0rd #password: mYpas$w0rd
+    network_mode: bridge
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    external_links:
+      - mysql:db
+    network_mode: bridge
