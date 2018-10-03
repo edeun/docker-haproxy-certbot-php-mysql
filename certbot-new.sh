@@ -17,4 +17,4 @@ fi
 userEmail=$1
 certDomain=$2
 
-docker-compose -f docker-compose-certbot.yml run --rm certbot certonly --standalone --email $userEmail --agree-tos --non-interactive -d $certDomain --http-01-port=8888
+docker-compose -f docker-compose-certbot.yml run --rm certbot certonly --standalone --email $userEmail --agree-tos --non-interactive -d $certDomain --http-01-port=8888 --dry-run
