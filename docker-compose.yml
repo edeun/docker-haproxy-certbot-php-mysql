@@ -12,7 +12,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8888:8888"
+      - "${PORT_CERTBOT}:${PORT_CERTBOT}"
     environment:
       - PORT_HTTP=80
       - PORT_HTTPS=443
