@@ -63,7 +63,7 @@ services:
     container_name: phpmyadmin
     restart: always
     environment:
-      PMA_PORT: ${MYSQL_DEFAULT_PORT}
+      PMA_PORT: ${MYSQL_PORT}
       PMA_HOST: ${IPV4_ADDR_MYSQL}
     networks:
       main:
