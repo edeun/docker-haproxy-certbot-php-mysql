@@ -3,9 +3,14 @@ version: '3'
 services:
   certbot:
     image: certbot/certbot:latest
-    command: certbot certonly --standalone -d ${URL_APP} -d ${URL_PHPMYADMIN} --agree-tos --non-interactive --http-01-port=${PORT_CERTBOT}
+    # command: certbot certonly --standalone -d ${URL_APP} -d ${URL_PHPMYADMIN} --agree-tos --non-interactive --http-01-port=${PORT_CERTBOT}
     volumes:
       - ${VOLUME_CERTBOT_CERTS}:/etc/letsencrypt
+    environment:
+      - USER_EMAIL=${CERTBOT_ISSUER_EMAIL}
+      - URL_APP=${URL_APP}
+      - URL_PHPMYADMIN={URL_PHPMYADMIN}
+      - PORT_CERTBOT=${PORT_CERTBOT}
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_CERTBOT}
