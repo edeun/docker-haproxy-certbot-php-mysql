@@ -12,7 +12,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "54321":"54321"
+      - "8888:8888"
     environment:
       - PORT_HTTP=80
       - PORT_HTTPS=443
