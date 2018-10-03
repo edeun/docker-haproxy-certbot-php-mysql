@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ${VOLUME_CERTBOT_CERTS}:/etc/letsencrypt
+      - ${VOLUME_CERTBOT_WEBROOT}:/var/www/certbot_webroot
+    networks:
+      main:
+        ipv4_address: ${IPV4_ADDR_CERTBOT}
+
+networks: 
+  main:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_CONFIG_SUBNET}

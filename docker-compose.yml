@@ -7,9 +7,12 @@ services:
     restart: always
     volumes:
       - ${VOLUME_HAPROXY_CFG}:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ${VOLUME_CERTBOT_CERTS}:/usr/local/etc/haproxy/certbot/certs
+      - ${VOLUME_CERTBOT_WEBROOT}:/var/www/certbot_webroot
     ports:
       - "80:80"
       - "443:443"
+      - "54321":"54321"
     environment:
       - PORT_HTTP=80
       - PORT_HTTPS=443
