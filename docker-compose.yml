@@ -12,7 +12,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "${PORT_CERTBOT}:${PORT_CERTBOT}"
     environment:
       - PORT_HTTP=80
       - PORT_HTTPS=443
@@ -21,7 +20,7 @@ services:
       - HDR_HOST_PHPMYADMIN_URL=${URL_PHPMYADMIN}
       - BACKEND_APP_SERVER_ADDR=${IPV4_ADDR_APP}
       - BACKEND_PHPMYADMIN_SERVER_ADDR=${IPV4_ADDR_PHPMYADMIN}
-      - IPV4_ADDR_HAPROXY=${IPV4_ADDR_HAPROXY}
+      - IPV4_ADDR_CERTBOT=${IPV4_ADDR_CERTBOT}
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_HAPROXY}
