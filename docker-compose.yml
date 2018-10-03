@@ -6,21 +6,21 @@ services:
     container_name: haproxy
     restart: always
     volumes:
-      - ${VOLUME_HAPROXY_CFG}:/usr/local/etc/haproxy/haproxy.cfg:ro
-      - ${VOLUME_CERTBOT_CERTS}:/usr/local/etc/haproxy/certbot/certs
-      - ${VOLUME_CERTBOT_WEBROOT}:/var/www/certbot_webroot
+      - ${VOLUME_HAPROXY_CFG}:${HAPROXY_ROOT_PATH}/haproxy.cfg:ro
+      - ${VOLUME_CERTBOT_CERTS}:${HAPROXY_ROOT_PATH}/certbot/certs
+      - ${VOLUME_SSL}:${HAPROXY_ROOT_PATH}/ssl
     ports:
       - "80:80"
       - "443:443"
     environment:
-      - PORT_HTTP=80
-      - PORT_HTTPS=443
       - PORT_CERTBOT=${PORT_CERTBOT}
       - HDR_HOST_APP_URL=${URL_APP}
       - HDR_HOST_PHPMYADMIN_URL=${URL_PHPMYADMIN}
       - BACKEND_APP_SERVER_ADDR=${IPV4_ADDR_APP}
       - BACKEND_PHPMYADMIN_SERVER_ADDR=${IPV4_ADDR_PHPMYADMIN}
       - IPV4_ADDR_CERTBOT=${IPV4_ADDR_CERTBOT}
+      - HAPROXY_ROOT_PATH=${HAPROXY_ROOT_PATH}
+      - HAPROXY_CERTBOOT_CERTS_PATH=${HAPROXY_ROOT_PATH}/certbot/certs
     networks:
       main:
         ipv4_address: ${IPV4_ADDR_HAPROXY}

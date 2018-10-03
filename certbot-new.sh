@@ -1,20 +1,12 @@
 #!/bin/bash
-
-# certbot-new.sh userEmail certDomain
+# certbot-new.sh dockerComposeFile
 
 if [ -z "$1" ]; then
-  echo 'Email required.'
-  echo 'Usage: ./certbot-new.sh userEmail certDomain'
+  echo 'dockerComposeFile required.'
+  echo 'Usage: ./certbot-new.sh dockerComposeFile'
   exit 1
 fi
 
-if [ -z "$2" ]; then
-  echo 'Domain required.'
-  echo 'Usage: ./certbot-new.sh userEmail certDomain'
-  exit 1
-fi
+# PORT_CERTBOT=$(grep PORT_CERTBOT .env | cut -d '=' -f2)
 
-userEmail=$1
-certDomain=$2
-
-docker-compose -f docker-compose-certbot.yml run --rm certbot certonly --standalone --email $userEmail --agree-tos --non-interactive -d $certDomain --http-01-port=8888
+docker-compose -f $1 run --rm 
