@@ -5,17 +5,13 @@ services:
     image: certbot/certbot:latest
     # command: certbot certonly --standalone -d ${URL_APP} -d ${URL_PHPMYADMIN} --agree-tos --non-interactive --http-01-port=${PORT_CERTBOT}
     command: [
-      "certbot", 
       "certonly", 
       "--standalone", 
-      "-d", 
-      "${URL_APP}", 
-      "-d", 
-      "${URL_PHPMYADMIN}",
+      "-d=${URL_APP}", 
+      "-d=${URL_PHPMYADMIN}",
       "--agree-tos", 
       "--non-interactive", 
-      "--http-01-port",
-      "${PORT_CERTBOT}"
+      "--http-01-port=${PORT_CERTBOT}"
     ]
     volumes:
       - ${VOLUME_CERTBOT_CERTS}:/etc/letsencrypt
