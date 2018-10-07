@@ -2,7 +2,7 @@ version: '3'
 
 services:
   certbot:
-    image: certbot/certbot:latest
+    image: certbot/certbot:latest,
     # command: certbot certonly --standalone -d ${URL_APP} -d ${URL_PHPMYADMIN} --agree-tos --non-interactive --http-01-port=${PORT_CERTBOT}
     command: [
       "certbot", 
