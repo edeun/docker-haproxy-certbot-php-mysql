@@ -3,15 +3,14 @@ version: '3'
 services:
   certbot:
     image: certbot/certbot:latest
-    # command: certbot certonly --standalone -d ${URL_APP} -d ${URL_PHPMYADMIN} --agree-tos --non-interactive --http-01-port=${PORT_CERTBOT}
     command: [
       "certonly", 
       "--standalone", 
-      "--email", "${CERTBOT_ISSUER_EMAIL}",
       "-d", "${URL_APP}", 
       "-d", "${URL_PHPMYADMIN}",
-      "--agree-tos", 
       "--non-interactive", 
+      "--agree-tos", 
+      "--email", "${CERTBOT_ISSUER_EMAIL}",
       "--http-01-port=${PORT_CERTBOT}"
     ]
     volumes:
