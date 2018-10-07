@@ -12,6 +12,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "${PORT_CERTBOT}:${PORT_CERTBOT}"
     environment:
       - PORT_CERTBOT=${PORT_CERTBOT}
       - HDR_HOST_APP_URL=${URL_APP}
