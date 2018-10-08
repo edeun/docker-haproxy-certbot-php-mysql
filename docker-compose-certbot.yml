@@ -16,6 +16,7 @@ services:
     ]
     volumes:
       - ${VOLUME_CERTBOT_CERTS}:/etc/letsencrypt
+      - ${VOLUME_CERTBOT_LOG}:/var/log/letsencrypt
     # environment:
     #   - USER_EMAIL=${CERTBOT_ISSUER_EMAIL}
     #   - URL_APP=${URL_APP}
