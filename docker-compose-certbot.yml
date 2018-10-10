@@ -39,6 +39,21 @@ services:
       main:
         ipv4_address: ${IPV4_ADDR_CERTBOT}
 
+  certbot-update:
+    image: certbot/certbot:latest
+    container_name: certbot
+    command: [
+      "renew",
+      "--force-renewal",
+      "--tls-sni-01-port=${PORT_CERTBOT}"
+    ]
+    volumes:
+      - ${VOLUME_CERTBOT_CERTS}:/etc/letsencrypt
+      - ${VOLUME_CERTBOT_LOG}:/var/log/letsencrypt
+    networks:
+      main:
+        ipv4_address: ${IPV4_ADDR_CERTBOT}
+
 networks: 
   main:
     driver: bridge
