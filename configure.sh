@@ -1,10 +1,6 @@
 #!/bin/bash
 #
-#
-#
-#
-#
-
+# Configure initial server with let's encrypt ssl
 
 #######################################
 # Get abstract path from current relative path
@@ -41,12 +37,9 @@ to_abs_path() {
 #   empty string if not exists
 #######################################
 get_value_from_env() {
-  env_var=$1
-  value=$(grep $env_var .env | cut -d '=' -f2)
-
-  echo $value
+  local env_var="$1"
+  echo "$(grep "$env_var" .env | cut -d '=' -f2)"
 }
-
 
 #######################################
 # main
