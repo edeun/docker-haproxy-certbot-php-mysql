@@ -50,7 +50,7 @@ main() {
   certbot_certs=$(get_value_from_env 'VOLUME_CERTBOT_CERTS')
 
   # 2. update certbot certs
-  docker-compose -f docker-compose-certbotyml run --rm certbot renew --force-renewal --tls-sni-01-port=$port_certbot
+  docker-compose -f docker-compose-certbot.yml run --rm certbot renew --force-renewal --tls-sni-01-port=$port_certbot
 
   # 3. create pem for haproxy
   # @see https://serversforhackers.com/c/letsencrypt-with-haproxy
