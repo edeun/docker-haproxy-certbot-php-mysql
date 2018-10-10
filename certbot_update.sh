@@ -3,6 +3,45 @@
 # Update certbot & Create .pem files
 # @see https://serversforhackers.com/c/letsencrypt-with-haproxy
 
+#######################################
+# Get abstract path from current relative path
+#
+# Arguments
+#  relative path
+#
+# Return
+#  abstract path
+#
+# Reference
+#  https://stackoverflow.com/questions/4175264/bash-retrieve-absolute-path-given-relative/51264222#51264222
+#######################################
+to_abs_path() {
+  local target="$1"
+
+  if [ "$target" == "." ]; then
+    echo "$(pwd)"
+  elif [ "$target" == ".." ]; then
+    echo "$(dirname "$(pwd)")"
+  else
+    echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+  fi
+}
+
+#######################################
+# Get the value from dotenv(.env) file
+#
+# Arguments
+#   env var name
+#
+# Returns
+#   env value
+#   empty string if not exists
+#######################################
+get_value_from_env() {
+  local env_var="$1"
+  echo "$(grep "$env_var" .env | cut -d '=' -f2)"
+}
+
 main() {
   # 1. get .env vars
   port_certbot=$(get_value_from_env 'PORT_CERTBOT')
