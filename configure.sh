@@ -7,32 +7,6 @@
 
 
 #######################################
-# Get full path from parameters
-#
-# Arguments
-#   relative path
-#
-# Returns
-#   full path of relative path
-#######################################
-#get_full_path_from() {
-#  # get paramter
-#  relative_path=$1
-#
-#  # get first 2 char will check if it is same as ./
-#  start_relative_path="${relative_path:0:2}"
-#
-#  if [[ $start_relative_path == "./" ]]; then
-#    path=${relative_path#'./'}
-#    echo "$(pwd)/$path"
-#  else
-#    echo ''
-#  fi
-#}
-
-
-
-#######################################
 # Get abstract path from current relative path
 #
 # Arguments
@@ -43,7 +17,6 @@
 #
 # Reference
 #  https://stackoverflow.com/questions/4175264/bash-retrieve-absolute-path-given-relative/51264222#51264222
-#
 #######################################
 to_abs_path() {
   local target="$1"
@@ -81,15 +54,15 @@ get_value_from_env() {
 #######################################
 main() {
   # 0. get .env variables
-  host_haproxy_http_cfg=$(get_value_from_env 'HOST_HAPROXY_CFG_HTTP')
-  host_haproxy_https_cfg=$(get_value_from_env 'HOST_HAPROXY_CFG_HTTPS')
+  conf_haproxy_http_cfg=$(get_value_from_env 'CONF_HAPROXY_CFG_HTTP')
+  conf_haproxy_https_cfg=$(get_value_from_env 'CONF_HAPROXY_CFG_HTTPS')
   volume_haproxy_cfg=$(get_value_from_env 'VOLUME_HAPROXY_CFG')
   url_app=$(get_value_from_env 'URL_APP')
   url_phpmyadmin=$(get_value_from_env 'URL_PHPMYADMIN')
   certbot_certs=$(get_value_from_env 'VOLUME_CERTBOT_CERTS')
 
   # 1. create symbolic link from haproxy.http.cfg to haproxy.cfg
-  ln -sf $(to_abs_path $host_haproxy_http_cfg) $(to_abs_path $volume_haproxy_cfg)
+  ln -sf $(to_abs_path $conf_haproxy_http_cfg) $(to_abs_path $volume_haproxy_cfg)
 
   # 1. docker containers up
   docker-compose up -d
@@ -113,9 +86,9 @@ main() {
 
   # 4. change haproxy.cfg symbolic link
   rm $(to_abs_path $volume_haproxy_cfg)
-  ln -sf $(to_abs_path $host_haproxy_https_cfg) $(to_abs_path $volume_haproxy_cfg)
+  ln -sf $(to_abs_path $conf_haproxy_https_cfg) $(to_abs_path $volume_haproxy_cfg)
 
-  # 4. restart haproxy
+  # 5. restart haproxy
   #docker exec -it haproxy haproxy -f /usr/local/etc/haproxy/haproxy.cfg -c
   #docker kill -s HUP haproxy
   docker-compose restart haproxy
