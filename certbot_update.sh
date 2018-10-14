@@ -42,12 +42,22 @@ get_value_from_env() {
   echo "$(grep "$env_var" .env | cut -d '=' -f2)"
 }
 
+#######################################
+# main
+# - entry function
+#######################################
 main() {
   # 1. get .env vars
+  log_path=$(get_value_from_env 'LOG_PATH')
   port_certbot=$(get_value_from_env 'PORT_CERTBOT')
   url_app=$(get_value_from_env 'URL_APP')
   url_phpmyadmin=$(get_value_from_env 'URL_PHPMYADMIN')
   certbot_certs=$(get_value_from_env 'VOLUME_CERTBOT_CERTS')
+
+  # 2. check log path exists if not make log dir
+  if [[ ! -e $(to_abs_path $log_path) ]]; then
+    mkdir $log_dir
+  fi
 
   # 2. update certbot certs
   docker-compose -f docker-compose-certbot.yml run --rm certbot-update
