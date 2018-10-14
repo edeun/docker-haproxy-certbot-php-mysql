@@ -136,7 +136,7 @@ VOLUME_APP=./php/example
 - VOLUME_SSL: certbot외 인증서를 저장하여 사용할 경우 사용자가 해당 디렉터리에 저장하여 사용하기 위한 공간입니다.
 - VOLUME_APP: 사용자의 Web Service가 저장되는 공간입니다. 본 프로젝트에서는 `./php/example` 디렉터리를 예시로 사용하였습니다. 추후 사용자의 웹 서비스 프로젝트 디렉터리를 상대경로로 입력하여 사용합니다.
 
-./configure.sh 실행하면 volume 디렉터리 내용들은 ./volume 디렉터리에 공유됩니다.
+configure.sh 실행하면 volume 디렉터리 내용들은 ./volume 디렉터리에 공유됩니다.
 
 ### 5-2. Network
 
