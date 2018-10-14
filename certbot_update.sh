@@ -55,7 +55,8 @@ main() {
   certbot_certs=$(get_value_from_env 'VOLUME_CERTBOT_CERTS')
 
   # 2. check log path exists if not make log dir
-  if [[ ! -e $(to_abs_path $log_path) ]]; then
+  $log_dir = $(to_abs_path $log_path)
+  if [[ ! -e $log_dir ]]; then
     mkdir $log_dir
   fi
 
