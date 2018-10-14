@@ -73,7 +73,7 @@ MYSQL_DATABASE=${YOUR_MYSQL_DATABASE}
   - ${YOUR_MYSQL_ROOT_PASSWORD}: 사용할 MySQL의 root 비밀번호를 입력합니다.
   - ${YOUR_MYSQL_USER}: 사용할 MySQL의 사용자 ID를 입력합니다.
   - ${YOUR_MYSQL_PASSWORD}: 사용할 MySQL의 사용자 ID에 해당하는 비밀번호를 입력합니다.
-  - ${YOUR_MYSQL_DATABASE}: 사용자 ID가 접근가능한 database name을 입력합니다.
+  - ${YOUR_MYSQL_DATABASE}: 사용자 ID가 접근가능할 database name을 입력합니다.
 
 > 사용하고자 하는 app, phpmyadmin 도메인은 사전에 DNS 설정이 되어 있어야 합니다.
 
