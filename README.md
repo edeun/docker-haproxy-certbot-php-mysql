@@ -21,7 +21,7 @@ docker를 이용해 1대의 서버에서 웹 서비스 운영에 필요한 Rever
 - DB Administration Tool
   - phpmyadmin/phpmyadmin:latest (https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
 - Let's Encrypt 인증서 발급/갱신
-  - certbot/certbot:latest
+  - certbot/certbot:latest (https://hub.docker.com/r/certbot/certbot/)
 
 ## 사용방법
 
