@@ -55,28 +55,24 @@ main() {
   certbot_certs=$(get_value_from_env 'VOLUME_CERTBOT_CERTS')
 
   # 2. check log path exists if not make log dir
-  $log_dir = $(to_abs_path $log_path)
+  log_dir=$(to_abs_path $log_path)
   if [[ ! -e $log_dir ]]; then
+    echo "Create log dir: "$log_dir
     mkdir $log_dir
   fi
 
-  # 2. update certbot certs
+  # 3. update certbot certs
   docker-compose -f docker-compose-certbot.yml run --rm certbot-update
-  # docker-compose -f docker-compose-certbot.yml run --rm certbot-phpmyadmin renew --force-renewal --tls-sni-01-port=$port_certbot
-  
-  # 3. create pem for haproxy
-  # @see https://serversforhackers.com/c/letsencrypt-with-haproxy
+
+  # 4. create pem for haproxy
   certs_live_path=$(to_abs_path $certbot_certs'/live')
   cert_app_path=$certs_live_path'/'$url_app
   cert_phpmyadmin_path=$certs_live_path'/'$url_phpmyadmin
 
-  # @see https://serversforhackers.com/c/letsencrypt-with-haproxy
   cat $cert_app_path'/fullchain.pem' $cert_app_path'/privkey.pem' | tee $cert_app_path'/'$url_app'.pem'
   cat $cert_phpmyadmin_path'/fullchain.pem' $cert_phpmyadmin_path'/privkey.pem' | tee $cert_phpmyadmin_path'/'$url_phpmyadmin'.pem'
 
-  # 4. restart haproxy
-  #docker exec -it haproxy haproxy -f /usr/local/etc/haproxy/haproxy.cfg -c
-  #docker kill -s HUP haproxy
+  # 5. restart haproxy
   docker-compose restart haproxy
 }
 
