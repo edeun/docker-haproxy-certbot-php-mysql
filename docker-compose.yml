@@ -58,7 +58,7 @@ services:
         ipv4_address: ${IPV4_ADDR_MYSQL}
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
     restart: always
     environment:
