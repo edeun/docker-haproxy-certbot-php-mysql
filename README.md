@@ -81,7 +81,7 @@ MYSQL_DATABASE=${YOUR_MYSQL_DATABASE}
 
 자세한 내용은 하단의 Volumes, Network Section을 참조해주세요.
 
-## 3. 실행
+### 3. 실행
 
 .env 파일이 설정 완료된 후 아래와 같이 `configure.sh` 쉘 스크립트를 이용해 실행하면 설정이 완료되며 사용자가 설정한 app, phpmyadmin 도메인을 이용해 https 접속이 가능합니다.
 
@@ -94,7 +94,7 @@ chmod +x configure.sh   # 실행 권한 추가
 
 위의 명령어 실행이 성공적으로 완료되면, 모든 과정이 완료됩니다.
 
-## 4. Crontab
+### 4. Crontab
 
 주기적인 Let's Encrypt https 갱신을 위해서 아래의 명령어를 crontab에 추가합니다.
 
@@ -107,9 +107,9 @@ chmod +x configure.sh   # 실행 권한 추가
 - ${PROJECT_CLONE_PATH}: 본 프로젝트를 clone한 path를 절대경로로 입력합니다.
 - ${PROJECT_LOG_PATH}: crontab 결과를 저장할 log path를 절대경로로 입력합니다. 해당 디렉터리는 .env의 LOG_PATH와 일치해야 합니다. LOG_PATH는 아래의 5-5. Log 항목을 참조해주세요.
 
-## 5. 참고사항
+### 5. 참고사항
 
-### 5-1. Volumes
+#### 5-1. Volumes
 
 본 프로젝트에서 docker container와 사용하고 있는 공유 디렉터리 및 파일(Volume) 정보는 .env에 기록되어 있으며 내용은 아래와 같습니다.
 
@@ -138,7 +138,7 @@ VOLUME_APP=./php/example
 
 configure.sh 실행하면 volume 디렉터리 내용들은 ./volume 디렉터리에 공유됩니다.
 
-### 5-2. Network
+#### 5-2. Network
 
 본 프로젝트에서는 자동화된 인증서 발급과 원활한 내부 컨테이너 참조를 위해 고정된 IP를 사용합니다.
 > haproxy.http.cfg, haproxy.https.cfg 내부에는 certbot 인증서 발급 / 갱신 동작을 위해 고정 IP 정보를 이용합니다.
@@ -168,7 +168,7 @@ PORT_CERTBOT=8888
 - IPv4_ADDR_APP: app 컨테이너에서 사용하는 IP Address를 입력합니다. app 컨테이너는 사용자의 웹 서비스 입니다.
 - PORT_CERTBOT: certbot이 인증서 발급 / 갱신을 위해 사용하는 port 번호입니다.
 
-### 5-3. Certbot
+#### 5-3. Certbot
 
 본 프로젝트에서는 Certbot을 이용한 Let's Encrypt SSL 발급 / 갱신을 위해 별도의 docker compose 환경설정 파일인 docker-compose-certbot.yml 을 이용합니다.
 
@@ -179,7 +179,7 @@ PORT_CERTBOT=8888
 
 인증서 갱신은 일괄 진행하며 docker-compose-certbot.yml 의 service 항목의 certbot-update 를 이용합니다.
 
-### 5-4. HAProxy
+#### 5-4. HAProxy
 
 Reverse Proxy인 HAProxy는 본 프로젝트에서 2개의 환경설정 파일(haproxy.http.cfg, haproxy.https.cfg) 파일을 이용하며 인증서 발급 전 / 후에 따라 각 파일을 haproxy.cfg로 심볼릭 링크로 생성하여 사용합니다. 해당 내용은 .env 파일의 HAProxy 항목에 설정항목으로 기록되어 있습니다.
 
@@ -190,7 +190,7 @@ CONF_HAPROXY_CFG_HTTP=./conf/haproxy/haproxy.http.cfg
 CONF_HAPROXY_CFG_HTTPS=./conf/haproxy/haproxy.https.cfg
 ```
 
-### 5-5. Log
+#### 5-5. Log
 
 본 프로젝트에서 로그는 crontab 의 결과를 저장하는 용도로 사용합니다.
 
@@ -203,7 +203,7 @@ LOG_PATH=./logs
 
 - LOG_PATH: 로그 파일을 저장할 경로를 상대경로로 입력합니다. 해당 내용은 현재 certbot_update.sh에서 존재여부를 확인한 후 없으면 생성하는 용도로 사용합니다.
 
-### 5-6. shutdown.sh, run.sh
+#### 5-6. shutdown.sh, run.sh
 
 `shutdown.sh`는 현재 실행중인 모든 docker container를 down 시킬 때 사용합니다. `run.sh` 는 반대로 down된 container들을 up 시키는데 사용합니다.
 
@@ -213,7 +213,6 @@ LOG_PATH=./logs
 chmod +x shutdown.sh
 chmod +x run.sh
 ```
-
 
 ## References
 
