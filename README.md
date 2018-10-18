@@ -1,4 +1,4 @@
-# docker-haproxy-server-conf
+# docker-haproxy-certbot-php-mysql
 
 docker를 이용해 1대의 서버에서 웹 서비스 운영에 필요한 Reverse Proxy, Web Service(PHP), Database, DB Administration Tool 을 구성하였습니다.
 
@@ -22,6 +22,14 @@ docker를 이용해 1대의 서버에서 웹 서비스 운영에 필요한 Rever
   - phpmyadmin/phpmyadmin:latest (https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
 - Let's Encrypt 인증서 발급/갱신
   - certbot/certbot:latest (https://hub.docker.com/r/certbot/certbot/)
+
+## 개발환경
+
+본 프로젝트는 아래의 환경에서 구현되었습니다.
+
+- ubuntu:18.04
+- docker-ce (https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+- docker-compose (https://docs.docker.com/compose/install/)
 
 ## 사용방법
 
